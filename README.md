@@ -7,6 +7,22 @@ Following the Twitter trend of *#100daysofcode* we are going to work on a site f
 ## START
 
 ```cli
+$ cd server
+
+$ npm install express express-sslify body-parser path
+
+$ npm install --save-dev @types/express @types/express-sslify @types/body-parser
+```
+
+```cli
+$ cd client
+
+$ npm install react-router-dom styled-components 
+
+$ npm install --save-dev @types/react-router-dom @types/styled-components
+```
+
+```cli
 $ npm install concurrently
 
 $ npm init -y
@@ -49,6 +65,18 @@ $ npm run start
 $ cd server
 
 $ npm run start
+```
+
+## Typescript @types/
+Be sure to only use the tsc command within the server directory.
+
+To have your typescript files auto compile just run the following command within terminal.
+This runs a small server out of that terminal. This can run in the background and will display errors in 
+typescript syntax.
+
+```cli
+$ cd server
+$ tsc -w
 ```
 
 ## the Music
