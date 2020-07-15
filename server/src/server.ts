@@ -9,7 +9,6 @@ if (process.env.NODE_ENV !== "production") {
 // ======================= //
 
 import express, { NextFunction } from "express";
-import enforce from "express-sslify"; // Note: force https
 import path from "path";
 import { json } from "body-parser";
 import todoRoutes from "./routes/todo.routes"; // Note: this was built to test the server and is not the best spot for it
@@ -18,8 +17,9 @@ import todoRoutes from "./routes/todo.routes"; // Note: this was built to test t
 // ===== Force HTTPS ===== //
 // ======================= //
 
+
 const app = express();
-app.use(enforce.HTTPS({ trustProtoHeader: true })); // Note: trustProtoHeader is for Heroku and is not needed for all hosts.
+
 
 // ======================= //
 // ======== Ports ======== //
@@ -36,6 +36,17 @@ app.use(json());
 
 
 app.use("/todos", todoRoutes);
+
+
+// ======================================== //
+// ==== if its production environment ====  //
+// ======================================== //
+
+
+if (process.env.NODE_ENV === "production") {
+	// console.log("Prod Mode Enabled")
+	app.use(express.static("../../client/build"));
+}
 
 
 // ======================= //
@@ -55,13 +66,14 @@ app.use(
   }
 );
 
+
 // ======================= //
 // ====== React App ====== //
 // ======================= //
 
 
 app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "../../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "../../client/build/index.html"));
 });
 
 
