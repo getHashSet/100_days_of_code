@@ -4,14 +4,17 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config(); // @types already provided by dotenv package
 }
 
+
 // ======================= //
 // ===== Dependencies ==== //
 // ======================= //
+
 
 import express, { NextFunction } from "express";
 import path from "path";
 import { json } from "body-parser";
 import todoRoutes from "./routes/todo.routes"; // Note: this was built to test the server and is not the best spot for it
+
 
 // ======================= //
 // ===== Force HTTPS ===== //
